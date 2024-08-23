@@ -1,0 +1,14 @@
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\bin\Debug\net8.0\ForenkletToDoAppAug2024.exe
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\bin\Debug\net8.0\ForenkletToDoAppAug2024.deps.json
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\bin\Debug\net8.0\ForenkletToDoAppAug2024.runtimeconfig.json
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\bin\Debug\net8.0\ForenkletToDoAppAug2024.dll
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\bin\Debug\net8.0\ForenkletToDoAppAug2024.pdb
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.AssemblyInfoInputs.cache
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.AssemblyInfo.cs
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.csproj.CoreCompileInputs.cache
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.dll
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\refint\ForenkletToDoAppAug2024.dll
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.pdb
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ForenkletToDoAppAug2024.genruntimeconfig.cache
+C:\Users\lapha\source\repos\ForenkletToDoAppAug2024\ForenkletToDoAppAug2024\obj\Debug\net8.0\ref\ForenkletToDoAppAug2024.dll
