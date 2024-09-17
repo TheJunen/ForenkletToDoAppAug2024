@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ForenkletToDoAppAug2024
 {
-    internal class Bathroom : Task
+    internal class Bathroom : Task 
     {
-        public Bathroom(string name, DateTime date, bool status, string comment) : base(name, date, status, comment)
+        public Bathroom(string name, DateTime date, TaskStatus status, string comment) : base(name, date, status, comment)
         {
 
         }

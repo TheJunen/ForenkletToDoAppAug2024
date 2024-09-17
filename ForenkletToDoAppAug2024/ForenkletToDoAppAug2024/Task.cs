@@ -6,15 +6,58 @@ using System.Threading.Tasks;
 
 namespace ForenkletToDoAppAug2024
 {
-    internal class Task
+    internal class Task //Oppgaver uten kategori lages type Task
     {
-        protected DateTime Date;
-        internal bool Status;
-        protected string Comment;
-        protected string Name;
+        protected DateTime _date;
+        internal TaskStatus Status {  get; set; }
+        protected string _comment = "Ingen kommentar";
+        protected string _name;
+
+        public DateTime Date //brukerinput må valideres
+        {
+            get { return _date; }
+            set 
+            { 
+                if (value <= DateTime.Now)
+                {
+                    throw new ArgumentException("Date must be in the future. Please try again.");
+                }
+                _date = value; 
+            }
+
+        }
+
+        public string Comment //brukerinput må valideres
+        {
+            get { return _comment; }
+            set 
+            {
+                if (value == null)
+                {
+                    throw new ArgumentException("Input is empty, have only space or is null.");
+                }
+                else if (value != "")
+                {
+                    _comment = value;
+                }
+            }
+        }
+
+        public string Name //brukerinput må valideres
+        {
+            get { return _name; }
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Input is empty, have only space or is null.");
+                }
+                _name = value;
+            }
+        }
 
         //ha metoder som er helt likt for alle klasser her, slik at det ikke blir gjentakelser.
-        public Task(string name, DateTime date, bool status, string comment)
+        public Task(string name, DateTime date, TaskStatus status, string comment)
         {
             Name = name;
             Date = date;
@@ -22,7 +65,7 @@ namespace ForenkletToDoAppAug2024
             Comment = comment;
         }
 
-        public Task()
+        public Task() //tom konstruktør for å lage en midlertidig instanse for å enkelt få tilgang til klassen.
         {
             
         }
@@ -49,23 +92,24 @@ namespace ForenkletToDoAppAug2024
             }
         }
 
-        protected bool UpdateStatus()
+        protected TaskStatus UpdateStatus()
         {
-            bool running = true;
+            bool isInputValid = false;
 
-            while (running)
+            while (!isInputValid)
             {
-                Console.WriteLine("Skriv inn ny status: (true/false)");
+                Console.WriteLine("Skriv inn ny status: (fra 1 til {0}):", Enum.GetValues(typeof(TaskStatus)).Length);
+                Console.WriteLine("Skriv 1 for 'IkkeStartet', 2 for 'IProgresjon' og 3 for 'Ferdig'.");
                 string answer = Console.ReadLine();
 
-                if (bool.TryParse(answer, out bool status))
+                if (int.TryParse(answer, out int status) && Enum.IsDefined(typeof(TaskStatus), status - 1))
                 {
-                    Status = status;
-                    running = false;
+                    Status = (TaskStatus)(status - 1);
+                    isInputValid = true;
                 }
                 else
                 {
-                    Console.WriteLine("Ugyldig input. Vennligst skriv inn 'true' eller 'false'.");
+                    Console.WriteLine("ugyldig input. vennligst skriv inn 1,2 eller 3.");
                 }
 
             }
@@ -78,7 +122,7 @@ namespace ForenkletToDoAppAug2024
             Comment = Console.ReadLine();
         }
 
-        internal void UpdateTask()
+        internal virtual void UpdateTask() //Strukturert slik at hver handling er delt opp i egne metoder, og puttet i en meny. Fått tilbakemelding om at alt bør deles i flere metoder for mer objektorientert.
         {
             Console.WriteLine("Skriv 1 for å oppdatere navn, 2 for tid, 3 for status og 4 for kommentar");
             string answer = Console.ReadLine();
@@ -112,15 +156,15 @@ namespace ForenkletToDoAppAug2024
 
         protected static DateTime AddDate()
         {
-            bool isValid = false;
+            bool isValidInput = false;
             DateTime newdate = DateTime.MinValue;
-            while (!isValid)
+            while (!isValidInput)
             {
                 Console.WriteLine("Skriv inn ny dato: (format: dd/MM/yyyy)");
                 if (DateTime.TryParse(Console.ReadLine(), out newdate))
                 {
                     Console.WriteLine("En gyldig tid ble skrevet. Fortsetter.");
-                    isValid = true;
+                    isValidInput = true;
                     return newdate;
                 }
                 else
@@ -131,26 +175,26 @@ namespace ForenkletToDoAppAug2024
             return newdate;
         }
 
-        protected bool AddStatus()
+        protected TaskStatus AddStatus()
         {
-            bool running = true;
-            while (running)
+            bool isInputValid = false;
+            while (!isInputValid)
             {
-                Console.WriteLine("Skriv inn status: (true/false)");
-                string input = Console.ReadLine();
-
-                if (bool.TryParse(input, out bool status))
+                Console.WriteLine("Skriv inn status: (fra 1 til {0}):", Enum.GetValues(typeof(TaskStatus)).Length);
+                Console.WriteLine("Skriv 1 for 'IkkeStartet', 2 for 'IProgresjon' og 3 for 'Ferdig'.");
+                string answer = Console.ReadLine();
+                if (int.TryParse(answer, out int status) && Enum.IsDefined(typeof(TaskStatus), status - 1))
                 {
-                    running = false;
-                    return status;
+                    isInputValid = true;
+                    return Status = (TaskStatus)(status - 1);
                 }
                 else
                 {
-                    Console.WriteLine("ugyldig input. vennligst skriv inn 'true' eller 'false'.");
+                    Console.WriteLine("ugyldig input. vennligst skriv inn 1,2 eller 3.");
                 }
 
             }
-            return false;
+            return Status;
         }
 
         protected string AddComment()
@@ -159,19 +203,20 @@ namespace ForenkletToDoAppAug2024
             string comment = Console.ReadLine();
             return comment;
         }
-        internal virtual Task AddTask()
+        internal virtual Task AddTask() //ikke meny, alle metoder kjører for å lage en hel oppgave.
         {
             Name = AddName();
             Date = AddDate();
             Status = AddStatus();
             Comment = AddComment();
             Task task = new Task(Name, Date, Status, Comment);
+            Console.WriteLine("Oppgave ble lagt til");
             return task;
         }
 
-        internal void WriteOutInfo()
+        internal virtual void WriteOutInfo() //skriver ut oppgavedetaljer
         {
-            Console.WriteLine($"{Name}, {Date}, {Status}, {Comment}");
+            Console.WriteLine($"{_name}, {_date}, {Status}, {_comment}");
         }
     }
 }

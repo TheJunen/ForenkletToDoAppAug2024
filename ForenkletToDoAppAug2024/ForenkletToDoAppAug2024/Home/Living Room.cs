@@ -8,7 +8,7 @@ namespace ForenkletToDoAppAug2024.Home
 {
     internal class Living_Room : Task
     {
-        public Living_Room(string name, DateTime date, bool status, string comment) : base(name, date, status, comment)
+        public Living_Room(string name, DateTime date, TaskStatus status, string comment) : base(name, date, status, comment)
         {
 
         }

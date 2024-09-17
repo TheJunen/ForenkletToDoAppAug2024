@@ -10,18 +10,18 @@ namespace ForenkletToDoAppAug2024
         static void Main(string[] args)
         {
             bool running = true;
-            List<Task> undonetask = new List<Task>();
+            List<Task> undonetask = new List<Task>(); //lager bool for while loop, lister, oppgaver, og UpdateList for å legge til oppgavene i riktig liste. DateTime er nytt for meg så var greit å øve
             List<Task> completedtask = new List<Task>();
-            DateTime bathroomdate = new DateTime(2024, 08, 10);
-            var bathroom = new Bathroom("Vaske do", bathroomdate, true, "Jo fortere gjort, jo bedre");
-            DateTime livingroomdate = new DateTime(2024, 08, 30);
-            var living_room = new Living_Room("Støvsuge stuen", livingroomdate, false, "");
-            DateTime sleepingroomdate = new DateTime(2024, 09, 05);
-            var sleeping_room = new Sleeping_Room("Rydde soverommet", sleepingroomdate, false, "");
-            DateTime bossdate = new DateTime(2024, 09, 01);
-            var boss = new Boss("levere inn rapport for aug 2024", bossdate, false, "må være nøyaktig", false);
+            DateTime bathroomdate = new DateTime(2024, 10, 10);
+            var bathroom = new Bathroom("Vaske do", bathroomdate, (TaskStatus)(0), "Jo fortere gjort, jo bedre");
+            DateTime livingroomdate = new DateTime(2024, 11, 30);
+            var living_room = new Living_Room("Støvsuge stuen", livingroomdate, (TaskStatus)(0), "");
+            DateTime sleepingroomdate = new DateTime(2024, 12, 05);
+            var sleeping_room = new Sleeping_Room("Rydde soverommet", sleepingroomdate, (TaskStatus)(2), "");
+            DateTime bossdate = new DateTime(2024, 12, 01);
+            var boss = new Boss("levere inn rapport for aug 2024", bossdate, (TaskStatus)(0), "må være nøyaktig", (StatusAtWorkOrHome)(0));
             DateTime othertaskdate = new DateTime(2024, 10, 05);
-            var othertask = new Task("Hente ungen i barnehagen", othertaskdate, false, "Hentes kl 15");
+            var othertask = new Task("Hente ungen i barnehagen", othertaskdate, (TaskStatus)(0), "Hentes kl 15");
             UpdateList(bathroom, undonetask, completedtask);
             UpdateList(living_room, undonetask, completedtask);
 
@@ -53,7 +53,7 @@ namespace ForenkletToDoAppAug2024
             //    undonetask = statusresult3;
             //}
 
-            Console.WriteLine("Her er listen av ugjorte oppgaver:");
+            Console.WriteLine("Her er listen av ugjorte oppgaver:"); //henter ut alle oppgavene fra listen og bruker writeoutinfo for å skrive ut oppgavedetaljene. Kunne godt vært i en metode for å minimere kode i Main
             foreach (Task task in undonetask)
             {
                 task.WriteOutInfo();
@@ -67,12 +67,12 @@ namespace ForenkletToDoAppAug2024
 
 
 
-            while (running)
+            while (running) //kjører helt til bruker velger å avslutte
             {
                 Console.WriteLine("Skriv 1 for å lage ny oppgave, 2 for å endre oppgave, 3 for å se listene av ugjorte og gjorte oppgaver");
                 string answer = Console.ReadLine();
 
-                switch (answer)
+                switch (answer) // meny med ulike funksjoner
                 {
                     case "1":
                         Console.WriteLine("Velg type: 1 for badet, 2 for stue, 3 for soverom, 4 for jobbsjefen, 5 for annen oppgave");
@@ -144,7 +144,7 @@ namespace ForenkletToDoAppAug2024
 //    */
 //}
 
-static private void UpdateList(Task task, List<Task> undonetask, List<Task> completedtask)
+static private void UpdateList(Task task, List<Task> undonetask, List<Task> completedtask) //sorterer til og putter i  ugjort og gjort liste 
         {
         //    var statusresult = CheckStatusAndPutToList(task, undonetask, completedtask);
         //    if (statusresult == completedtask)
@@ -157,7 +157,7 @@ static private void UpdateList(Task task, List<Task> undonetask, List<Task> comp
         //        undonetask = statusresult;
         //        return undonetask;
         //    }
-            if (task.Status == false)
+            if (task.Status == TaskStatus.IkkeStartet || task.Status == TaskStatus.IProgresjon)
             {
                 undonetask.Add(task);
             }
@@ -186,7 +186,7 @@ static private void UpdateList(Task task, List<Task> undonetask, List<Task> comp
             //}
         }
 
-        static private int PrintList(List<Task> undonetask, List<Task> completedtask)
+        static private int PrintList(List<Task> undonetask, List<Task> completedtask) //skriver ut listene basert på valg
         {
             Console.WriteLine("Skriv 1 for ugjort liste, 2 for gjort liste");
 
@@ -197,12 +197,14 @@ static private void UpdateList(Task task, List<Task> undonetask, List<Task> comp
                 switch (answer)
                 {
                     case "1":
+                        Console.WriteLine("Her er listen av ugjorte oppgaver:");
                         foreach (var task in undonetask)
                         {
                             task.WriteOutInfo();
                         }
                         return 1;
                     case "2":
+                        Console.WriteLine("Her er listen av ferdige oppgaver:");
                         foreach (var task in completedtask)
                         {
                             task.WriteOutInfo();
@@ -217,7 +219,7 @@ static private void UpdateList(Task task, List<Task> undonetask, List<Task> comp
             
         }
 
-        static private List<Task> ChooseTaskAndEdit(List<Task> undonetask, List<Task> completedtask)
+        static private List<Task> ChooseTaskAndEdit(List<Task> undonetask, List<Task> completedtask) //skriver ut valgt liste, og en meny for å endre oppgave i listen
         {
             Console.WriteLine("Velg 1 for å endre ugjort liste, 2 for gjort liste");
             int result = PrintList(undonetask, completedtask);
