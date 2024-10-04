@@ -9,7 +9,7 @@ namespace ForenkletToDoAppAug2024.Work
 {
     internal class Boss : Task //egen updateTask og AddWork, fordi AtWork må endres og lages egen type instanse
     {
-        private StatusAtWorkOrHome AtWorkOrHome { get; set; }
+        public StatusAtWorkOrHome AtWorkOrHome { get; private set; }
 
         public Boss(string name, DateTime date, TaskStatus status, string comment, StatusAtWorkOrHome atworkorhome) : base(name, date, status, comment)
         {
@@ -49,7 +49,7 @@ namespace ForenkletToDoAppAug2024.Work
             }
         }
 
-        private StatusAtWorkOrHome AddAtWorkOrHome()
+        private StatusAtWorkOrHome AddAtWorkOrHome() //skriver inn status for om det er hjemme eller jobboppgave
         {
 
             while(true)

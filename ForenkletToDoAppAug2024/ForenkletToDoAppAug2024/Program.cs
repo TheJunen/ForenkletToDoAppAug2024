@@ -17,13 +17,17 @@ namespace ForenkletToDoAppAug2024
             DateTime livingroomdate = new DateTime(2024, 11, 30);
             var living_room = new Living_Room("Støvsuge stuen", livingroomdate, (TaskStatus)(0), "");
             DateTime sleepingroomdate = new DateTime(2024, 12, 05);
-            var sleeping_room = new Sleeping_Room("Rydde soverommet", sleepingroomdate, (TaskStatus)(2), "");
+            var sleeping_room = new Sleeping_Room("Rydde soverommet", sleepingroomdate, (TaskStatus)(1), "");
             DateTime bossdate = new DateTime(2024, 12, 01);
-            var boss = new Boss("levere inn rapport for aug 2024", bossdate, (TaskStatus)(0), "må være nøyaktig", (StatusAtWorkOrHome)(0));
+            var boss = new Boss("levere inn rapport for aug 2024", bossdate, (TaskStatus)(2), "må være nøyaktig", (StatusAtWorkOrHome)(0));
             DateTime othertaskdate = new DateTime(2024, 10, 05);
-            var othertask = new Task("Hente ungen i barnehagen", othertaskdate, (TaskStatus)(0), "Hentes kl 15");
+            var othertask = new Task("Hente ungen i barnehagen", othertaskdate, (TaskStatus)(2), "Hentes kl 15");
             UpdateList(bathroom, undonetask, completedtask);
             UpdateList(living_room, undonetask, completedtask);
+            UpdateList(sleeping_room, undonetask, completedtask);
+            UpdateList(boss, undonetask, completedtask);
+            UpdateList(othertask, undonetask, completedtask);
+
 
             //var statusresult = bathroom.CheckStatusAndPutToList(bathroom, undonetask, completedtask);
             //if (statusresult == completedtask)
@@ -222,15 +226,15 @@ static private void UpdateList(Task task, List<Task> undonetask, List<Task> comp
         static private List<Task> ChooseTaskAndEdit(List<Task> undonetask, List<Task> completedtask) //skriver ut valgt liste, og en meny for å endre oppgave i listen
         {
             Console.WriteLine("Velg 1 for å endre ugjort liste, 2 for gjort liste");
-            int result = PrintList(undonetask, completedtask);
+            int result = PrintList(undonetask, completedtask); //basert
             
 
             if (result == 1)
             {
-                Console.WriteLine("Skriv 1 for å endre nr 1, 2 for nr 2 også videre");
                 bool running = true;
                 while (running)
                 {
+                    Console.WriteLine("Skriv 1 for å endre nr 1, 2 for nr 2 også videre");
                     string input = Console.ReadLine();
 
                     if (int.TryParse(input, out int number))
